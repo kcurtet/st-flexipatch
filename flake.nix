@@ -16,7 +16,7 @@
             buildInputs = with pkgs; with xorg; [ libX11 libXft imlib2 fontconfig freetype libsixel ];
 
             installPhase = ''
-               PREFIX=$out make install
+               DESTDIR=$out make install
             '';
           };
         };

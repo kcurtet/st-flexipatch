@@ -12,12 +12,21 @@
           st = pkgs.stdenv.mkDerivation {
             name = "st";
             src = ./.;
+            outputs = [
+              "out"
+              "terminfo"
+            ];
+              
             nativeBuildInputs = [ pkgs.pkg-config ];
             buildInputs = with pkgs; with xorg; [ libX11 libXft imlib2 fontconfig freetype libsixel ];
 
-            installPhase = ''
-               DESTDIR=$out make install
-            '';
+            preInstall = ''
+export TERMINFO=$terminfo/share/terminfo
+mkdir -p $TERMINFO $out/nix-support
+echo "$terminfo" >> $out/nix-support/propagated-user-env-packages
+'';
+
+            installFlags = [ "PREFIX=$(out)" ];
           };
         };
         apps = {

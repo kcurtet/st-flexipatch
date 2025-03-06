@@ -7,7 +7,8 @@
     flake-utils.lib.eachDefaultSystem (system:
       let pkgs = nixpkgs.legacyPackages.${system}; in
       {
-        packages = {
+        packages = rec {
+          default = st;
           st = pkgs.stdenv.mkDerivation {
             name = "st";
             src = ./.;

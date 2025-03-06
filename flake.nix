@@ -3,9 +3,17 @@
 
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = nixpkgs.legacyPackages.${system}; in
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
       {
         packages = rec {
           default = st;
@@ -16,15 +24,28 @@
               "out"
               "terminfo"
             ];
-              
-            nativeBuildInputs = [ pkgs.pkg-config ];
-            buildInputs = with pkgs; with xorg; [ libX11 libXft imlib2 fontconfig freetype libsixel ];
+
+            nativeBuildInputs = [
+              pkgs.pkg-config
+              pkgs.fontconfig
+              pkgs.freetype
+              pkgs.ncurses
+            ];
+            buildInputs =
+              with pkgs;
+              with xorg;
+              [
+                libX11
+                libXft
+                imlib2
+                libsixel
+              ];
 
             preInstall = ''
-export TERMINFO=$terminfo/share/terminfo
-mkdir -p $TERMINFO $out/nix-support
-echo "$terminfo" >> $out/nix-support/propagated-user-env-packages
-'';
+              export TERMINFO=$terminfo/share/terminfo
+              mkdir -p $TERMINFO $out/nix-support
+              echo "$terminfo" >> $out/nix-support/propagated-user-env-packages
+            '';
 
             installFlags = [ "PREFIX=$(out)" ];
           };

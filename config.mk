@@ -4,7 +4,7 @@ VERSION = 0.9.2
 # Customize below to fit your system
 
 # paths
-PREFIX = /usr/local
+PREFIX = 
 MANPREFIX = $(PREFIX)/share/man
 ICONPREFIX = $(PREFIX)/share/pixmaps
 ICONNAME = st.png

@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+static char *font = "0xProto Nerd Font:pixelsize=14:antialias=true:autohint=true";
 #if FONT2_PATCH
 /* Spare fonts */
 static char *font2[] = {
@@ -186,33 +186,32 @@ char *xdndescchar = " !\"#$&'()*;<>?[\\]^`{|}~";
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-	/* 8 normal colors */
-	"black",
-	"red3",
-	"green3",
-	"yellow3",
-	"blue2",
-	"magenta3",
-	"cyan3",
-	"gray90",
+    /* 8 normal colors */
 
+  	"#51576D",
+	"#E78284",
+	"#A6D189",
+	"#E5C890",
+	"#8CAAEE",
+	"#F4B8E4",
+	"#81C8BE",
+	"#B5BFE2",
+  
 	/* 8 bright colors */
-	"gray50",
-	"red",
-	"green",
-	"yellow",
-	"#5c5cff",
-	"magenta",
-	"cyan",
-	"white",
-
+	"#626880",
+	"#E78284",
+	"#A6D189",
+	"#E5C890",
+	"#8CAAEE",
+	"#F4B8E4",
+	"#81C8BE",
+	"#A5ADCE",
+	
 	[255] = 0,
 
-	/* more colors can be added after 255 to use with DefaultXX */
-	"#add8e6", /* 256 -> cursor */
-	"#555555", /* 257 -> rev cursor*/
-	"#000000", /* 258 -> bg */
-	"#e5e5e5", /* 259 -> fg */
+	"#C6D0F5", /* default foreground colour */
+	"#303446", /* default background colour */
+	"#F2D5CF", /*575268*/
 };
 
 
@@ -224,14 +223,14 @@ static const char *colorname[] = {
 unsigned int defaultbg = 0;
 unsigned int bg = 17, bgUnfocused = 16;
 #else
-unsigned int defaultbg = 258;
+unsigned int defaultbg = 257;
 #endif // ALPHA_FOCUS_HIGHLIGHT_PATCH
-unsigned int defaultfg = 259;
-unsigned int defaultcs = 256;
-unsigned int defaultrcs = 257;
+unsigned int defaultfg = 256;
+unsigned int defaultcs = 258;
+unsigned int defaultrcs = 258;
 #if SELECTION_COLORS_PATCH
-unsigned int selectionfg = 258;
-unsigned int selectionbg = 259;
+unsigned int selectionfg = 257;
+unsigned int selectionbg = 256;
 /* If 0 use selectionfg as foreground in order to have a uniform foreground-color */
 /* Else if 1 keep original foreground-color of each cell => more colors :) */
 static int ignoreselfg = 1;
